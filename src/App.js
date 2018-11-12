@@ -1,35 +1,9 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
 
-const Index = () => {
-  return <div></div>
-}
-
-const Daily = () => {
-  return <div></div>
-}
-
-const Navigation = () => {
-  return <div className="navigation">
-    <ul className="nav">
-      <li>
-        <Link to={'/'} className="nav-link" >
-          <span className="">列車查詢</span>
-        </Link>
-      </li>
-      <li>
-        <Link to={'/daily'} className="nav-link" >
-          <span className="">當日查詢</span>
-        </Link>
-      </li>
-    </ul>
-  </div>
-}
-
-const UserForm = () => {
-  return <div className="user-form">
-    </div>
-}
+import Index from './components/Index'
+import Daily from './components/Daily'
+import Navigation from './components/Navigation'
 
 class App extends Component {
   render() {
@@ -40,11 +14,8 @@ class App extends Component {
               <Navigation />
             </div>
             <div className="contain-block">
-              <UserForm />
-              <div className="card-block">
-                <Route exact path="/" component={Index} />
-                <Route exact path="/daily" component={Daily} />
-              </div>
+              <Route exact path="/" render={props =><Index {...props} />} />
+            <Route exact path="/daily" render={props => <Daily {...props} />} />
             </div>
           </div>
         </div>

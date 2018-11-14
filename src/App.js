@@ -15,7 +15,7 @@ class App extends Component {
             </div>
             <div className="contain-block">
               <Route exact path="/" render={props =><Index {...props} />} />
-            <Route exact path="/daily" render={props => <Daily {...props} />} />
+             <Route exact path="/daily" render={props => <Daily {...props} />} />
             </div>
           </div>
         </div>

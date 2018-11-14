@@ -1,20 +1,21 @@
-@import "variables";
+@import 'variables';
 
-body{
-  margin:0;
+body {
+  margin: 0;
 }
 
-.app{
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+.app {
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
   font-size: $base-font-size;
   font-weight: normal;
   line-height: 1.5;
   color: $font-color;
-  background-color:$background-color;
-  height:100vh;
+  background-color: $background-color;
+  height: 100vh;
 }
 
-.app-body{
+.app-body {
   display: inline-flex;
   width: 100%;
   height: 100%;
@@ -22,54 +23,110 @@ body{
 }
 
 .contain-block,
-.side-bar{
+.side-bar {
   display: inline-block;
   margin: 0.65rem;
 }
 
 .side-bar,
 .card-block,
-.user-form{
+.user-form {
   background-color: $block-color;
   border: 1px solid $block-border-color;
 }
 
-.side-bar{
+.side-bar {
   margin-right: 0rem;
-  width:15rem;
+  width: 15rem;
   height: 200px;
 }
 
-
 .card-block,
-.user-form{
+.user-form {
   padding: 1rem;
 }
 
 .card,
-.contain-block{
+.contain-block {
   height: 100%;
 }
 
-.user-form{
+.user-form {
   height: 100px;
 }
 
-.contain-block{
+.contain-block {
   width: calc(100% - 276px);
 }
 
-.card-block{
-  margin-top: .65rem;
+.card-block {
+  margin-top: 0.65rem;
   padding: 1rem;
   height: calc(100% - 207px);
 }
 
-
-ul.nav{
+ul.nav {
   list-style: none;
   font-size: 1.5rem;
-  li{
-    margin-bottom:20px;
+  li {
+    margin-bottom: 20px;
+  }
+}
+
+.basic-column {
+  display: block;
+  label {
+    margin-right: 15px;
+    input,select{
+      margin-left: 5px;
+      font-size: 1rem;
+      border-radius: 5px;
+      padding: 3px 5px;
+      background-color: #ffffff;
+      border: solid 1px #9b9b9b;
+      &:disabled{
+        cursor: not-allowed;
+        background-color: #eeeeee;
+      }
+    }
+    input{
+      width: 11rem;
+      height: 1.5rem;
+    }
+    select{
+      height: 1.9rem;
+      width: 4.5rem;
+    }
+  }
+}
+
+.search-button {
+  margin-top:15px;
+}
+
+button.primary {
+  display: inline-block;
+  text-align: center;
+  line-height: 1;
+  user-select: none;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  transition: all 0.2s ease-in-out;
+  width: 100px;
+  height: 30px;
+  color: #fff;
+  background-color: rgb(53,131,190);
+  border-color: rgb(53,131,190);
+  cursor: pointer;
+  &:hover {
+    background-color: #1e8fc6;
+    border-color: #1c89be;
+  }
+  &:disabled {
+    background-color: #36a9e1;
+    border-color: #36a9e1;
+    cursor: not-allowed;
   }
 }

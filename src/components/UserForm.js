@@ -7,7 +7,6 @@ class UserForm extends Component {
     super(props)
 
     props.getStations()
-    const stations = props.stations
     this.searhClick = this.searhClick.bind(this)
     this.paramsChange = this.paramsChange.bind(this)
     this.state = {
@@ -18,15 +17,14 @@ class UserForm extends Component {
         endStationId: 0
       }
     }
-
-    // if (stations.length > 0) {
-    //   this.state.searchParams.startStationId = stations[0].StationID
-    //   this.state.searchParams.endStationId = stations[0].StationID
-    // }
   }
 
   searhClick() {
     const searchParams = this.state.searchParams
+
+    if (this.state.formType === '/daily'){
+      this.props.getAvaliableSeat(searchParams)
+    }
     this.props.searchTHSRMethod(searchParams)
   }
 
@@ -44,6 +42,7 @@ class UserForm extends Component {
     if (nextProps.stations.length > 0) {
       searchParams['startStationId'] = stations[0].StationID
       searchParams['endStationId'] = stations[0].StationID
+      nextProps.getAvaliableSeat(searchParams)
       this.setState({ searchParams });
     }
   }
@@ -107,6 +106,7 @@ function IndexColumn(props) {
 
 function SearchButton(props) {
   const { searchMethod } = props
+
   return (
     <div className="search-button">
       <button className="primary" type="button" onClick={searchMethod}>
@@ -124,6 +124,7 @@ function mapDispatchToProps(dispatch) {
   return {
     searchClick: params => dispatch(actions.getTHSRIndex(params)),
     getStations: () => dispatch(actions.getStations()),
+    getAvaliableSeat: params => dispatch(actions.getAvaliableSeat(params))
   }
 }
 

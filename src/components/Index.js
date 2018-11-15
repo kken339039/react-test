@@ -21,7 +21,7 @@ class Index extends Component {
 
   render() {
     const { trains, fares, searchClick, onClickMinus } = this.props
-    const price = fares.length > 0 ? fares[0].Fares[0].Price : 0
+    const price = fares ? fares[0].Fares[0].Price : 0
     const dataDatble = checkTableData(trains, price, this.state.sortType, this.toggleSort)
 
     trains.forEach(train => {
@@ -65,7 +65,7 @@ function checkTableData(trains, price, sort, toggleSort) {
                 <td>{train.OriginStopTime.DepartureTime}</td>
                 <td>{train.DestinationStopTime.StationName.Zh_tw}</td>
                 <td>{train.costTime} 分鐘</td>
-                <td>{price}</td>
+                <td>{price}元</td>
               </tr>)}
           </tbody>
         </table>

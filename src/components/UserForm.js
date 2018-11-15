@@ -1,30 +1,28 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import * as actions from '../store/actions'
 
 class UserForm extends Component {
   constructor(props) {
     super(props)
-    fetch(
-      `https://ptx.transportdata.tw/MOTC/v2/Rail/THSR/Station?$top=30&$format=JSON`
-    )
-      .then(res => res.json())
-      .then(data => {
-        const searchParams = this.state.searchParams
-        searchParams['startStationId'] = data[0].StationID
-        searchParams['endStationId'] = data[0].StationID
 
-        this.setState({ stations: data, searchParams })
-      })
+    props.getStations()
+    const stations = props.stations
     this.searhClick = this.searhClick.bind(this)
     this.paramsChange = this.paramsChange.bind(this)
     this.state = {
       formType: props.currentUrl,
-      stations: [],
       searchParams: {
         rideDate: new Date().toISOString().substr(0, 10),
         startStationId: 0,
         endStationId: 0
       }
     }
+
+    // if (stations.length > 0) {
+    //   this.state.searchParams.startStationId = stations[0].StationID
+    //   this.state.searchParams.endStationId = stations[0].StationID
+    // }
   }
 
   searhClick() {
@@ -39,11 +37,25 @@ class UserForm extends Component {
     this.setState({ searchParams })
   }
 
+  componentWillReceiveProps(nextProps) {
+    const stations = nextProps.stations
+    const searchParams = this.state.searchParams
+
+    if (nextProps.stations.length > 0) {
+      searchParams['startStationId'] = stations[0].StationID
+      searchParams['endStationId'] = stations[0].StationID
+      this.setState({ searchParams });
+    }
+  }
+
   render() {
+    const stations = this.props.stations
+
     return (
       <div className="user-form">
         <Form
           propData={this.state}
+          stations={stations}
           searchMethod={this.searhClick}
           paramsChange={this.paramsChange}
         />
@@ -53,8 +65,8 @@ class UserForm extends Component {
 }
 
 function Form(props) {
-  const { formType, searchParams, stations } = props.propData
-  const { searchMethod, paramsChange, checkDateDisabled } = props
+  const { formType, searchParams} = props.propData
+  const { searchMethod, paramsChange, checkDateDisabled, stations } = props
 
   return <IndexColumn searchParams={searchParams} stations={stations} searchMethod={searchMethod} paramsChange={paramsChange} formType={formType} />
 }
@@ -104,4 +116,18 @@ function SearchButton(props) {
   )
 }
 
-export default UserForm
+function mapStateToProps(state) {
+  return { stations: state.stations }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    searchClick: params => dispatch(actions.getTHSRIndex(params)),
+    getStations: () => dispatch(actions.getStations()),
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserForm)

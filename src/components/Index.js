@@ -75,9 +75,9 @@ function checkTableData(trains, price, sort, toggleSort) {
 }
 
 function calcucateTime(train) {
-  let date = new Date().toISOString().substr(0, 10)
-  let start = new Date(`${date} ${train.OriginStopTime.DepartureTime}`)
-  let end = new Date(`${date} ${train.DestinationStopTime.ArrivalTime}`)
+  const date = new Date().toISOString().substr(0, 10)
+  const start = new Date(`${date} ${train.OriginStopTime.DepartureTime}`)
+  const end = new Date(`${date} ${train.DestinationStopTime.ArrivalTime}`)
 
   return parseInt(end - start) / 1000 / 60
 }

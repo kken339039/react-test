@@ -1,10 +1,17 @@
-export default (state = {trains: [], fares: []}, action) => {
+export default (state = { trains: [], fares: [], stations:[]}, action) => {
+  let newObj = Object.assign({}, state);
   switch (action.type) {
     case 'getTHSRIndex':
-    let newObj = state
-      return { trains: action.trains, fares: state.fares }
+      newObj['trains'] = action.trains
+      return newObj
+      // return { trains: action.trains, fares: state.fares, stations: state.stations }
     case 'getTHSRFares':
-      return { trains: state.trains, fares: action.fares }
+      newObj['statifaresons'] = action.fares
+      return newObj
+    case 'getStations':
+      newObj['stations'] = action.stations
+      return newObj
+      // { trains: state.trains, fares: state.fares, stations: action.stations }
     default:
       return state
   }

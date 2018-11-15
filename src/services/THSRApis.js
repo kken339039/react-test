@@ -3,43 +3,58 @@ const baseUrl = `https://ptx.transportdata.tw/MOTC/v2/Rail/THSR/`
 export default {
   getStations(callback) {
     fetch(
-      `https://ptx.transportdata.tw/MOTC/v2/Rail/THSR/Station?$top=30&$format=JSON`
-    ).then(function (response) {
+      `${baseUrl}Station?$top=30&$format=JSON`
+    ).then(function(response) {
       if (response.ok) {
-        response.json().then(function (data) {
+        response.json().then(function(data) {
           callback(data)
         })
       } else {
-        callback("Stations list is not found")
+        alert('伺服器異常請聯絡相關人員')
       }
     })
   },
   getList(params, callback) {
-    fetch(baseUrl + `DailyTimetable/OD/${params.startStationId}/to/${params.endStationId}/${params.rideDate}`)
-    .then(function(response){
-      if(response.ok){
-        response.json().then(function(data){
+    fetch(
+      `${baseUrl}DailyTimetable/OD/${params.startStationId}/to/${params.endStationId}/${params.rideDate}`
+    ).then(function(response) {
+      if (response.ok) {
+        response.json().then(function(data) {
+          if(data <= 0){
+            alert('日期或起迄站選擇錯誤')
+          }
           callback(data)
         })
-      }else{
-        callback("Trains list is not found")
+      } else {
+        alert('伺服器異常請聯絡相關人員')
       }
     })
   },
   getFareList(params, callback) {
-    fetch(baseUrl + `ODFare/${params.startStationId}/to/${params.endStationId}`).then(
+    fetch(
+      `${baseUrl}ODFare/${params.startStationId}/to/${params.endStationId}`).then(
       function(response) {
         if (response.ok) {
           response.json().then(function(data) {
             callback(data)
           })
         } else {
-          callback('Fares list is not found')
+          alert('伺服器異常請聯絡相關人員')
         }
       }
     )
   },
-  getDaily(params){
-    return fetch(baseUrl + `AvailableSeatStatusList/${params.startStationId}?$top=30&$format=JSON`)
+  getAvaliableSeat(params, callback) {
+    fetch(`${baseUrl}AvailableSeatStatusList/${params.startStationId}`).then(
+      function(response) {
+        if (response.ok) {
+          response.json().then(function(data) {
+            callback(data[0].AvailableSeats)
+          })
+        } else {
+          callback('Avaliable seat list is not found')
+        }
+      }
+    )
   }
 }

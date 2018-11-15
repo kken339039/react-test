@@ -29,15 +29,7 @@ class UserForm extends Component {
 
   searhClick() {
     const searchParams = this.state.searchParams
-    const baseUrl = `https://ptx.transportdata.tw/MOTC/v2/Rail/THSR/`
-    let url = this.state.formType === '/' ?
-      `DailyTimetable/OD/${searchParams.startStationId}/to/${searchParams.endStationId}/${searchParams.rideDate}`
-      : `AvailableSeatStatusList/1010?$top=30&$format=JSON`
-    fetch(baseUrl + url)
-      .then(res => res.json())
-      .then(data => {
-        console.log(data)
-      })
+    this.props.searchTHSRMethod(searchParams)
   }
 
   paramsChange(name, e) {

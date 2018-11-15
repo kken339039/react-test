@@ -77,23 +77,24 @@ ul.nav {
   display: block;
   label {
     margin-right: 15px;
-    input,select{
+    input,
+    select {
       margin-left: 5px;
       font-size: 1rem;
       border-radius: 5px;
       padding: 3px 5px;
       background-color: #ffffff;
       border: solid 1px #9b9b9b;
-      &:disabled{
+      &:disabled {
         cursor: not-allowed;
         background-color: #eeeeee;
       }
     }
-    input{
+    input {
       width: 11rem;
       height: 1.5rem;
     }
-    select{
+    select {
       height: 1.9rem;
       width: 4.5rem;
     }
@@ -101,7 +102,7 @@ ul.nav {
 }
 
 .search-button {
-  margin-top:15px;
+  margin-top: 15px;
 }
 
 button.primary {
@@ -117,8 +118,8 @@ button.primary {
   width: 100px;
   height: 30px;
   color: #fff;
-  background-color: rgb(53,131,190);
-  border-color: rgb(53,131,190);
+  background-color: rgb(53, 131, 190);
+  border-color: rgb(53, 131, 190);
   cursor: pointer;
   &:hover {
     background-color: #1e8fc6;
@@ -129,4 +130,50 @@ button.primary {
     border-color: #36a9e1;
     cursor: not-allowed;
   }
+}
+
+.data-table {
+  overflow: auto;
+  height: 100%;
+  table {
+    border: 1px solid $block-border-color;
+    border-spacing: 1px;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    text-align: center;
+    thead {
+      background-color: #36a9e1;
+      height: 30px;
+    }
+    tbody tr {
+      border-bottom: 1px solid $block-border-color;
+    }
+  }
+}
+
+span.fa-asc,
+span.fa-desc{
+  cursor: pointer;
+  &:after{
+    display: inline-block;
+    left: 5px;
+    content: '';
+    border-width: 8px 8px 8px 8px;
+    border-style: solid;
+    position: relative;
+  }
+  &:hover:after{
+    opacity: 0.7;
+  }
+}
+
+span.fa-asc:after{
+  top: 8px;
+  border-color: #ff4d4d transparent transparent transparent;
+}
+
+span.fa-desc:after{
+  top: -1px;
+  border-color: transparent transparent #ff4d4d transparent;
 }
